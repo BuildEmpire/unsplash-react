@@ -22,7 +22,7 @@ export default class InsertIntoApplicationUploader extends React.Component {
 
     nextProps
       .downloadPhoto(nextPhoto)
-      .then(r => r.url)
+      .then(r => r)
       .then(this.props.onFinishedUploading)
   }
 

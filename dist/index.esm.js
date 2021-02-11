@@ -863,7 +863,7 @@ var InsertIntoApplicationUploader = function (_React$Component) {
       if ((prevPhoto && prevPhoto.id) === (nextPhoto && nextPhoto.id)) return;
 
       nextProps.downloadPhoto(nextPhoto).then(function (r) {
-        return r.url;
+        return r;
       }).then(this.props.onFinishedUploading);
     }
   }, {
@@ -1000,15 +1000,33 @@ var UnsplashPicker = function (_React$Component) {
       _this.setState({ loadingPhoto: photo });
       var preferredSize = _this.props.preferredSize;
 
-      var download = _this.state.unsplash.downloadPhoto(photo);
+      var download = _this.state.unsplash.getPhoto(photo.id);
 
       var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
-        return r.urls.custom;
+        var photoUrl = r.urls.custom;
+        var photographerName = r.user.name;
+        var photographerLink = r.links.html;
+        return {
+          photo: {
+            photoUrl: photoUrl,
+            photographerName: photographerName,
+            photographerLink: photographerLink
+          }
+        };
       }) : download.then(function (r) {
-        return r.url;
+        var photoUrl = r.urls.full;
+        var photographerName = r.user.name;
+        var photographerLink = r.links.html;
+        return {
+          photo: {
+            photoUrl: photoUrl,
+            photographerName: photographerName,
+            photographerLink: photographerLink
+          }
+        };
       });
 
-      return downloadPromise.then(fetch).catch(function (e) {
+      return downloadPromise.then({ fetch: fetch }).catch(function (e) {
         return _this.setState({ error: e.message, isLoadingSearch: false });
       });
     };

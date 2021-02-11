@@ -183,14 +183,36 @@ export default class UnsplashPicker extends React.Component {
   downloadPhoto = photo => {
     this.setState({ loadingPhoto: photo })
     const { preferredSize } = this.props
-    const download = this.state.unsplash.downloadPhoto(photo)
+    const download = this.state.unsplash.getPhoto(photo.id)
 
     const downloadPromise = preferredSize
-      ? this.state.unsplash.getPhoto(photo.id, preferredSize).then(r => r.urls.custom)
-      : download.then(r => r.url)
+      ? this.state.unsplash.getPhoto(photo.id, preferredSize).then((r) => {
+        const photoUrl = r.urls.custom;
+        const photographerName = r.user.name;
+        const photographerLink = r.links.html;
+        return {
+          photo: {
+            photoUrl,
+            photographerName,
+            photographerLink,
+          }
+        };
+      })
+      : download.then((r) => {
+        const photoUrl = r.urls.full;
+        const photographerName = r.user.name;
+        const photographerLink = r.links.html;
+        return {
+          photo: {
+            photoUrl,
+            photographerName,
+            photographerLink
+          }
+        }
+      })
 
     return downloadPromise
-      .then(fetch)
+      .then({ fetch })
       .catch(e => this.setState({ error: e.message, isLoadingSearch: false }))
   }
 

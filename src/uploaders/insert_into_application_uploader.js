@@ -25,7 +25,7 @@ export default class InsertIntoApplicationUploader extends React.Component {
       .then(r => r)
       .then(this.props.onFinishedUploading)
   }
-
+  
   render() {
     return null
   }

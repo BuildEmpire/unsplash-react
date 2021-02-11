@@ -189,24 +189,24 @@ export default class UnsplashPicker extends React.Component {
       ? this.state.unsplash.getPhoto(photo.id, preferredSize).then((r) => {
         const photoUrl = r.urls.custom;
         const photographerName = r.user.name;
-        const photographerLink = r.links.html;
+        const photographerUrl = r.links.html;
         return {
           photo: {
             photoUrl,
             photographerName,
-            photographerLink,
+            photographerUrl,
           }
         };
       })
       : download.then((r) => {
         const photoUrl = r.urls.full;
         const photographerName = r.user.name;
-        const photographerLink = r.links.html;
+        const photographerUrl = r.links.html;
         return {
           photo: {
             photoUrl,
             photographerName,
-            photographerLink
+            photographerUrl
           }
         }
       })

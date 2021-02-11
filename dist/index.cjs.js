@@ -1011,23 +1011,23 @@ var UnsplashPicker = function (_React$Component) {
       var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
         var photoUrl = r.urls.custom;
         var photographerName = r.user.name;
-        var photographerLink = r.links.html;
+        var photographerUrl = r.links.html;
         return {
           photo: {
             photoUrl: photoUrl,
             photographerName: photographerName,
-            photographerLink: photographerLink
+            photographerUrl: photographerUrl
           }
         };
       }) : download.then(function (r) {
         var photoUrl = r.urls.full;
         var photographerName = r.user.name;
-        var photographerLink = r.links.html;
+        var photographerUrl = r.links.html;
         return {
           photo: {
             photoUrl: photoUrl,
             photographerName: photographerName,
-            photographerLink: photographerLink
+            photographerUrl: photographerUrl
           }
         };
       });

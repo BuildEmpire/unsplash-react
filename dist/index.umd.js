@@ -4526,24 +4526,24 @@
 
 	      var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
 	        var photoUrl = r.urls.custom;
-	        var photographerName = r.user.name;
-	        var photographerUrl = r.links.html;
+	        var authorName = r.user.name;
+	        var authorUrl = r.links.html;
 	        return {
 	          photo: {
 	            photoUrl: photoUrl,
-	            photographerName: photographerName,
-	            photographerUrl: photographerUrl
+	            authorName: authorName,
+	            authorUrl: authorUrl
 	          }
 	        };
 	      }) : download.then(function (r) {
 	        var photoUrl = r.urls.full;
-	        var photographerName = r.user.name;
-	        var photographerUrl = r.links.html;
+	        var authorName = r.user.name;
+	        var authorUrl = r.links.html;
 	        return {
 	          photo: {
 	            photoUrl: photoUrl,
-	            photographerName: photographerName,
-	            photographerUrl: photographerUrl
+	            authorName: authorName,
+	            authorUrl: authorUrl
 	          }
 	        };
 	      });

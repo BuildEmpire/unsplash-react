@@ -1003,25 +1003,25 @@ var UnsplashPicker = function (_React$Component) {
       var download = _this.state.unsplash.getPhoto(photo.id);
 
       var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
-        var photoUrl = r.urls.custom;
-        var authorName = r.user.name;
-        var authorUrl = r.links.html;
+        var unsplashPhotoUrl = r.urls.custom;
+        var unsplashAuthorName = r.user.name;
+        var unsplashAuthorUrl = r.links.html;
         return {
           photo: {
-            photoUrl: photoUrl,
-            authorName: authorName,
-            authorUrl: authorUrl
+            unsplashPhotoUrl: unsplashPhotoUrl,
+            unsplashAuthorName: unsplashAuthorName,
+            unsplashAuthorUrl: unsplashAuthorUrl
           }
         };
       }) : download.then(function (r) {
-        var photoUrl = r.urls.full;
-        var authorName = r.user.name;
-        var authorUrl = r.links.html;
+        var unsplashPhotoUrl = r.urls.full;
+        var unsplashAuthorName = r.user.name;
+        var unsplashAuthorUrl = r.links.html;
         return {
           photo: {
-            photoUrl: photoUrl,
-            authorName: authorName,
-            authorUrl: authorUrl
+            unsplashPhotoUrl: unsplashPhotoUrl,
+            unsplashAuthorName: unsplashAuthorName,
+            unsplashAuthorUrl: unsplashAuthorUrl
           }
         };
       });

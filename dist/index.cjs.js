@@ -869,7 +869,7 @@ var InsertIntoApplicationUploader = function (_React$Component) {
       if ((prevPhoto && prevPhoto.id) === (nextPhoto && nextPhoto.id)) return;
 
       nextProps.downloadPhoto(nextPhoto).then(function (r) {
-        return r.url;
+        return r;
       }).then(this.props.onFinishedUploading);
     }
   }, {
@@ -1006,15 +1006,33 @@ var UnsplashPicker = function (_React$Component) {
       _this.setState({ loadingPhoto: photo });
       var preferredSize = _this.props.preferredSize;
 
-      var download = _this.state.unsplash.downloadPhoto(photo);
+      var download = _this.state.unsplash.getPhoto(photo.id);
 
       var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
-        return r.urls.custom;
+        var unsplashPhotoUrl = r.urls.custom;
+        var unsplashAuthorName = r.user.name;
+        var unsplashAuthorUrl = r.links.html;
+        return {
+          photo: {
+            unsplashPhotoUrl: unsplashPhotoUrl,
+            unsplashAuthorName: unsplashAuthorName,
+            unsplashAuthorUrl: unsplashAuthorUrl
+          }
+        };
       }) : download.then(function (r) {
-        return r.url;
+        var unsplashPhotoUrl = r.urls.full;
+        var unsplashAuthorName = r.user.name;
+        var unsplashAuthorUrl = r.links.html;
+        return {
+          photo: {
+            unsplashPhotoUrl: unsplashPhotoUrl,
+            unsplashAuthorName: unsplashAuthorName,
+            unsplashAuthorUrl: unsplashAuthorUrl
+          }
+        };
       });
 
-      return downloadPromise.then(fetch).catch(function (e) {
+      return downloadPromise.then({ fetch: fetch }).catch(function (e) {
         return _this.setState({ error: e.message, isLoadingSearch: false });
       });
     };
